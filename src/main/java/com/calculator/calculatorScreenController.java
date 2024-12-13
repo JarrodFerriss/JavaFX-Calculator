@@ -68,6 +68,7 @@ public class calculatorScreenController {
 
             // Perform the calculation based on the operator
             double result = switch (operator) {
+
                 case "+" -> firstOperand + secondOperand;
 
                 case "-" -> firstOperand - secondOperand;
@@ -79,8 +80,13 @@ public class calculatorScreenController {
                 default -> 0; // Default result if operator is invalid
             };
 
-            // Display the result and reset variables
+            // Display the result
             display.setText(String.valueOf(result));
+
+            // Store the result as the first operand for continued calculations
+            firstOperand = result;
+
+            // Reset currentInput and operator for the next operation
             currentInput = "";
             operator = "";
         }
@@ -93,8 +99,13 @@ public class calculatorScreenController {
      */
     private void handleOperator(String op) {
 
-        // Store the first operand and the selected operator
-        firstOperand = Double.parseDouble(currentInput);
+        if (!currentInput.isEmpty()) {
+
+            // Store the first operand and the selected operator
+            firstOperand = Double.parseDouble(currentInput);
+        }
+
+        //Update the operator
         operator = op;
 
         // Clear the current input for the next operand
