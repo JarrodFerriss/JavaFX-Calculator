@@ -75,7 +75,18 @@ public class calculatorScreenController {
 
                 case  "*" -> firstOperand * secondOperand;
 
-                case "/" -> firstOperand / secondOperand;
+                case "/" -> {
+
+                    if (secondOperand == 0) {
+
+                        // Clear the currentInput and operator
+                        currentInput = "";
+                        operator = "";
+                        yield 0.0; // Yield a default result to prevent issues
+                    }
+
+                    yield firstOperand / secondOperand; // Perform the division
+                }
 
                 default -> 0; // Default result if operator is invalid
             };
